@@ -1,0 +1,31 @@
+<table class="table table-hover text-center">
+    <thead>
+        <tr>
+		<th>Дата начала</th><th>Дата окончания</th>
+		<th>Название</th><th>Учасники</th><th></th>
+	</tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of getTodoItems(); let i = index">
+            <td><div class="my-3">{{item.startDate}}</div></td>
+            <td><div class="my-3">{{item.endDate}}</div></td>
+            <td><div class="my-3">{{item.activity}}</div></td>
+            <td><div class="my-3">{{item.executors}}</div></td>
+	    <td>
+		<button class="btn btn btn-outline-secondary my-2" 
+			(click)="addItem(todoText.value)">
+        		Редактировать
+    		</button>
+		<button class="btn btn-danger my-2 ml-2" (click)="addItem(todoText.value)">
+        		Удалить
+    		</button>
+	    </td>
+        </tr>           
+    </tbody>
+</table>
+<div class="d-flex justify-content-center">
+    <!--<input class="form-control" #todoText />-->
+    <button class="btn btn-primary mt-3" (click)="addItem(todoText.value)">
+        Добавить задание
+    </button>
+</div>

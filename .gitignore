@@ -1,0 +1,6 @@
+# Netbeans
+# https://github.com/github/gitignore/blob/master/Global/NetBeans.gitignore
+nbactions.xml
+nb-configuration.xml
+frontend/node_modules
+build/
