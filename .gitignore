@@ -2,5 +2,7 @@
 # https://github.com/github/gitignore/blob/master/Global/NetBeans.gitignore
 nbactions.xml
 nb-configuration.xml
+**/node_modules
 frontend/node_modules
+frontend/node_modules/
 build/

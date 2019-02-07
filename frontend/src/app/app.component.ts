@@ -18,7 +18,7 @@ export class AppComponent {
 
     addItem(newItem) {
         if (newItem != "") {
-            this.model.items.push(new TodoItem(newItem, false));
+            this.model.items.push(new TodoItem(newItem, newItem, newItem, newItem));
         }
     }
 }
