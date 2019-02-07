@@ -1,24 +1,24 @@
 import { Component } from "@angular/core";
-import { Model, TodoItem } from "./model";
+import { Model, Tasklist } from "./task.model";
 
 @Component({
     selector: "todo-app",
-    templateUrl: "app.component.html"
+    templateUrl: "tasklist.component.html"
 })
-export class AppComponent {
+export class TasklistComponent {
     model = new Model();
 
     getName() {
         return this.model.user;
     }
 
-    getTodoItems() {
+    getTasklist() {
         return this.model.items.filter(item => !item.done);
     }
 
     addItem(newItem) {
         if (newItem != "") {
-            this.model.items.push(new TodoItem(newItem, newItem, newItem, newItem));
+            this.model.items.push(new Tasklist(newItem, newItem, newItem, newItem));
         }
     }
 }
