@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
-import { Model, Tasklist } from "./task.model";
+import { Model, Tasklist } from "./model/tasklist.model";
 
 @Component({
-    selector: "todo-app",
-    templateUrl: "tasklist.component.html"
+    selector: "index",
+    templateUrl: "./tasklist.component.html"
 })
 export class TasklistComponent {
     model = new Model();
