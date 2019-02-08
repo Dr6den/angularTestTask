@@ -1,22 +1,26 @@
 import { Injectable } from "@angular/core";
 import { Tasklist } from "./tasklist.model";
+import { Task } from "./task.model";
 import { Observable } from "rxjs";
 import { RestDataSource } from "./rest.datasource";
 
 @Injectable()
 export class Model {
-	user;
-    items;
+    tasklist;
     
     constructor() {
-        this.user = "Andrew";
         let executorsTwony = ['helen', 'hope', 'lussi'];
 	let executorsTwonyZero = ['maria', 'hope', 'marta'];
 	let executorsTwonyFirst = ['helen', 'andrew'];
-        this.items = [new Tasklist("10.10.1920", "1.1.1921", "hanging", executorsTwony),
-                      new Tasklist("1.5.1920", "11.1.1921", "calculating", executorsTwony),
-                      new Tasklist("10.10.1920", "1.5.1922", "tabulating", executorsTwonyZero),
-                      new Tasklist("1.8.1920", "1.6.1923", "punch cards collecting", executorsTwonyFirst)]
+	let tasksArray = [new Task("hanging", new Date(1920, 10, 10), new Date(1921, 1, 1), executorsTwony),
+                      new Task("calculating", new Date(1920, 1, 5), new Date(1921, 11, 1), executorsTwony),
+                      new Task("tabulating", new Date(1920, 10, 17), new Date(1922, 5, 11), executorsTwonyZero),
+                      new Task("punch cards collecting", new Date(1920, 8, 12), new Date(1923, 7, 21), executorsTwonyFirst)];
+        this.tasklist = new Tasklist(tasksArray);
+    }
+
+    getTasklist(): Array<Task> {
+	return this.tasklist.getItems();
     }
 
     /*private products: Product[] = new Array<Product>();

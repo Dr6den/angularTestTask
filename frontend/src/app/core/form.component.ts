@@ -17,13 +17,13 @@ export class FormComponent {
                 private router: Router) {
 
 this.task.name="nadia";
-this.task.startDate="12.12.2012";
-this.task.endDate="12.12.2012";
+this.task.startDate = new Date(2000, 12, 12);
+this.task.endDate = new Date(2000, 12, 12);
 this.task.executors=['sto','dfjk','ddk'];
 
 this.task.executors.map(obj => this.executorsMap.set(obj, false));
 
-console.log("##############################eeeeee" + this.executorsMap.get('ddk'));
+console.log("##############################eeeeee" + this.task.startDate);
         /*this.editing = activeRoute.snapshot.params["mode"] == "edit";
 
         let id = activeRoute.snapshot.params["id"];

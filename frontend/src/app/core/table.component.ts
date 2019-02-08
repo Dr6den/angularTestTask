@@ -1,5 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { Tasklist } from "../model/tasklist.model";
+import { Task } from "../model/task.model";
 import { Model } from "../model/repository.model";
 
 @Component({
@@ -18,8 +19,8 @@ export class TableComponent {
         return this.model.getProducts();
     }*/
 
-    getTasklist(): Tasklist {
-        return this.model.items.filter(item => !item.done);
+    getTasklist(): Array<Task> {
+        return this.model.getTasklist();
     }
 
     /*deleteProduct(key: number) {

@@ -7,9 +7,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of getTasklist(); let i = index">
-            <td><div class="my-3">{{item.startDate}}</div></td>
-            <td><div class="my-3">{{item.endDate}}</div></td>
-            <td><div class="my-3">{{item.activity}}</div></td>
+            <td><div class="my-3">{{item.startDate | date :'dd.MM.yyyy'}}</div></td>
+            <td><div class="my-3">{{item.endDate | date :'dd.MM.yyyy'}}</div></td>
+            <td><div class="my-3">{{item.name}}</div></td>
             <td><div class="my-3">{{item.executors}}</div></td>
 	    <td>
 		<button class="btn btn btn-outline-secondary my-2" 
