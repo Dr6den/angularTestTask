@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Product } from "./product.model";
 import { Tasklist } from "./tasklist.model";
 import { Observable } from "rxjs";
 import { RestDataSource } from "./rest.datasource";

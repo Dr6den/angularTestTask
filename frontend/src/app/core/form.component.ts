@@ -1,6 +1,5 @@
 import { Component, Inject } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { Product } from "../model/product.model";
 import { Task } from "../model/task.model";
 import { Model } from "../model/repository.model";
 import { ActivatedRoute, Router } from "@angular/router";
