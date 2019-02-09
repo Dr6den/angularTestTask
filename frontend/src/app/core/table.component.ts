@@ -23,13 +23,14 @@ export class TableComponent {
         return this.model.getTasklist();
     }
 
-    /*deleteProduct(key: number) {
-        this.model.deleteProduct(key);
-    }*/
+    deleteItem(item: Task) {
+        console.log(item.name);
+	window.location.reload();
+    }
 
-    //editProduct(key: number) {
-    //    this.observer.next(new SharedState(MODES.EDIT, key));
-    //}
+    editItem(item: Task) {
+        console.log(item.name);
+    }
 
     //createProduct() {
     //    this.observer.next(new SharedState(MODES.CREATE));

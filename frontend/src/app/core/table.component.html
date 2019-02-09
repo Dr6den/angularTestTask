@@ -13,10 +13,11 @@
             <td><div class="my-3">{{item.executors}}</div></td>
 	    <td>
 		<button class="btn btn btn-outline-secondary my-2" 
-			(click)="addItem(todoText.value)">
+			[routerLink]="['/form', 'create', item.id,
+                    {name: item.name, startDate: item.startDate, endDate: item.endDate, executors: item.executors}]">
         		Редактировать
     		</button>
-		<button class="btn btn-danger my-2 ml-2" (click)="addItem(todoText.value)">
+		<button class="btn btn-danger my-2 ml-2" (click)="deleteItem(item)">
         		Удалить
     		</button>
 	    </td>
