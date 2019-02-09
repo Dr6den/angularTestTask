@@ -15,32 +15,20 @@ export class FormComponent {
 
     constructor(private model: Model, activeRoute: ActivatedRoute,
                 private router: Router) {
-
-this.task.name="nadia";
-this.task.startDate = new Date(2000, 12, 12);
-this.task.endDate = new Date(2000, 12, 12);
-this.task.executors=['sto','dfjk','ddk'];
-
-this.task.executors.map(obj => this.executorsMap.set(obj, false));
-
-console.log("##############################eeeeee" + this.task.startDate);
-        /*this.editing = activeRoute.snapshot.params["mode"] == "edit";
-
-        let id = activeRoute.snapshot.params["id"];
-        if (id != null) {
-            let name = activeRoute.snapshot.params["name"];
-            let category = activeRoute.snapshot.params["category"];
-            let price = activeRoute.snapshot.params["price"];
-
-            if (name != null && category != null && price != null) {
-                this.product.id = id;
-                this.product.name = name;
-                this.product.category = category;
-                this.product.price = Number.parseFloat(price);
-            } else {
-                Object.assign(this.product, model.getProduct(id) || new Product());
-            }
-        }*/
+	
+	if(activeRoute.snapshot.params["name"] === undefined) {
+		this.task.name = "";
+		this.task.startDate = new Date();
+		this.task.endDate = new Date();
+		this.task.executors = [];
+	} else {
+		this.task.name = activeRoute.snapshot.params["name"];
+		this.task.startDate = activeRoute.snapshot.params["startDate"];
+		this.task.endDate = activeRoute.snapshot.params["endDate"];
+		this.task.executors = activeRoute.snapshot.params["executors"].split(',');;
+	}
+	this.task.executors.map(obj => this.executorsMap.set(obj, false));
+console.log("##############################" + this.executorsMap.size );
     }
 
     editing: boolean = false;
