@@ -28,7 +28,7 @@ export class FormComponent {
 		this.task.executors = activeRoute.snapshot.params["executors"].split(',');;
 	}
 	this.task.executors.map(obj => this.executorsMap.set(obj, false));
-console.log("##############################" + this.executorsMap.size );
+console.log("##############################" );
     }
 
     editing: boolean = false;
