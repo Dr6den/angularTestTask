@@ -6,7 +6,7 @@
 	</tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of getTasklist(); let i = index">
+        <tr *ngFor="let item of getTasklist()">
             <td><div class="my-3">{{item.startDate | date :'dd.MM.yyyy'}}</div></td>
             <td><div class="my-3">{{item.endDate | date :'dd.MM.yyyy'}}</div></td>
             <td><div class="my-3">{{item.name}}</div></td>

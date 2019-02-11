@@ -6,6 +6,6 @@ import { RestDataSource, REST_URL } from "./rest.datasource";
 @NgModule({
     imports: [HttpClientModule, HttpClientJsonpModule],
     providers: [Model, RestDataSource,
-        { provide: REST_URL, useValue: `http://${location.hostname}:3500/products` }]
+        { provide: REST_URL, useValue: `http://localhost:8080/TasklistRestEndpoint` }]
 })
 export class ModelModule { }

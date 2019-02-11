@@ -7,38 +7,22 @@ import { RestDataSource } from "./rest.datasource";
 @Injectable()
 export class Model {
     tasklist;
-    
-    constructor() {
-        let executorsTwony = ['helen', 'hope', 'lussi'];
-	let executorsTwonyZero = ['maria', 'hope', 'marta'];
-	let executorsTwonyFirst = ['helen', 'andrew'];
-	let tasksArray = [new Task("hanging", new Date(1920, 10, 10), new Date(1921, 1, 1), executorsTwony),
-                      new Task("calculating", new Date(1920, 1, 5), new Date(1921, 11, 1), executorsTwony),
-                      new Task("tabulating", new Date(1920, 10, 17), new Date(1922, 5, 11), executorsTwonyZero),
-                      new Task("punch cards collecting", new Date(1920, 8, 12), new Date(1923, 7, 21), executorsTwonyFirst)];
-        this.tasklist = new Tasklist(tasksArray);
-    }
+    executors = [];
 
     getTasklist(): Array<Task> {
-	return this.tasklist.getItems();
+	let newTL = new Tasklist(this.tasklist);
+	return newTL.getItems();
     }
-
-    /*private products: Product[] = new Array<Product>();
-    private locator = (p: Product, id: number) => p.id == id;
 
     constructor(private dataSource: RestDataSource) {
-        this.dataSource.getData().subscribe(data => this.products = data);
+        this.tasklist = this.dataSource.getTasklist().subscribe(data => this.tasklist = data);
     }
 
-    getProducts(): Product[] {
-        return this.products;
+    getExecutors(): Array<string> {
+	return this.dataSource.getExecutors();
     }
 
-    getProduct(id: number): Product {
-        return this.products.find(p => this.locator(p, id));
-    }
-
-    saveProduct(product: Product) {
+    /*saveProduct(product: Product) {
         if (product.id == 0 || product.id == null) {
             this.dataSource.saveProduct(product)
                 .subscribe(p => this.products.push(p));
