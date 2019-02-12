@@ -10,15 +10,22 @@ export class Model {
     executors = [];
 
     getTasklist(): Array<Task> {
-	let newTL = new Tasklist(this.tasklist);
-	return newTL.getItems();
+	this.tasklist = this.dataSource.getTasklist().subscribe(data => {console.log(data[0].name);
+		if (data[0] != undefined) { 
+		this.tasklist = data;
+		this.tasklist.unsubscribe();
+		}
+	});
+
+return null;
+	//let newTL = new Tasklist(this.tasklist);
+	//return newTL.getItems();
     }
 
-    constructor(private dataSource: RestDataSource) {
-        this.tasklist = this.dataSource.getTasklist().subscribe(data => this.tasklist = data);
+    constructor(private dataSource: RestDataSource) {        
     }
 
-    getExecutors(): Array<string> {
+    getExecutors(): Observable<string[]> {
 	return this.dataSource.getExecutors();
     }
 

@@ -12,9 +12,9 @@ export class RestDataSource {
     constructor(private http: HttpClient,
         @Inject(REST_URL) private url: string) { }
 
-    getTasklist(): Observable<Tasklist> {
+    getTasklist(): Observable<Task[]> {
         let url = this.url + "/getTasklist";
-        return this.sendRequest<Tasklist>("GET", url);
+        return this.sendRequest<Task[]>("GET", url);
     }
 
     getExecutors(): Observable<string[]> {

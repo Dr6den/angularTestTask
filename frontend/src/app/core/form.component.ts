@@ -21,15 +21,26 @@ export class FormComponent {
 		this.task.name = "";
 		this.task.startDate = new Date();
 		this.task.endDate = new Date();
-		this.task.executors = this.model.getExecutors().subscribe(data => {this.task.executors = data;
-		 	this.task.executors.map(obj => this.executorsMap.set(obj, false));
+		this.task.executors = this.model.getExecutors().subscribe(data => {
+			if ((data[0] != undefined) && typeof data[0] == "string") {
+				this.task.executors = Object.assign(new Array(), data);
+				data.map(obj => this.executorsMap.set(obj, false));
+			}
 		});
 	} else {
 		this.task.name = activeRoute.snapshot.params["name"];
 		this.task.startDate = activeRoute.snapshot.params["startDate"];
 		this.task.endDate = activeRoute.snapshot.params["endDate"];
-		this.task.executors = activeRoute.snapshot.params["executors"].split(',');;
-		this.task.executors.map(obj => this.executorsMap.set(obj, false));
+		let allOfExecutors = activeRoute.snapshot.params["executors"].split(','); 
+		this.task.executors = this.model.getExecutors().subscribe(data => {
+			if ((data[0] != undefined) && typeof data[0] == "string") {
+				this.task.executors = Object.assign(new Array(), data);
+		 		this.task.executors.map(obj => {
+					allOfExecutors.includes(obj) ? 
+						this.executorsMap.set(obj, true) : 
+						this.executorsMap.set(obj, false)});
+			}
+		});
 	}
     }
 
