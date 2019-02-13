@@ -14,7 +14,8 @@ export class RestDataSource {
 
     getTasklist(): Observable<Task[]> {
         let url = this.url + "/getTasklist";
-        return this.sendRequest<Task[]>("GET", url);
+return this.http.get<Task[]>(url);
+        //return this.sendRequest<Task[]>("GET", url);
     }
 
     getExecutors(): Observable<string[]> {
@@ -22,20 +23,26 @@ export class RestDataSource {
         return this.sendRequest<string[]>("GET", url);
     }
 
-
-    /*saveProduct(product: Product): Observable<Product> {
-        return this.sendRequest<Product>("POST", this.url, product);
+    saveTask(task: Task): Observable<string> {
+	let url = this.url + "/saveTask/" + task.name;
+        return this.sendRequest<string>("PUT", url, "{}");
     }
 
-    deleteProduct(id: number): Observable<Product> {
-        return this.sendRequest<Product>("DELETE", `${this.url}/${id}`);
-    }*/
+    deleteTask(id: string): Observable<string> {
+	let url = this.url + "/deleteTask/" + id;
+        return this.sendRequest<string>("DELETE", url);
+    }
 
-    private sendRequest<T>(verb: string, url: string, body?: Task)
+    private sendRequest<T>(verb: string, url: string, body?: string)
         : Observable<T> {
 
         let myHeaders = new HttpHeaders();
-
+	if(verb == "POST") {
+		myHeaders = myHeaders.set("Access-Control-Allow-Origin","*");
+		myHeaders = myHeaders.set("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
+		myHeaders = myHeaders.set("Access-Key", "<secret>");
+		myHeaders = myHeaders.set("Application-Names", ["exampleApp", "pro"]);
+	}
         return this.http.request<T>(verb, url, {
             body: body,
             headers: myHeaders

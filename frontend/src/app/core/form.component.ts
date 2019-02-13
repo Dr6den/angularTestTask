@@ -48,14 +48,13 @@ export class FormComponent {
 
     submitForm(form: NgForm) {console.log("#############################submit"+this.task.startDate);
         if (form.valid) {
-            //this.model.saveProduct(this.product);
-            //this.product = new Product();
-            //form.reset();
+	    this.model.getTasklist();
+            this.model.saveTask(this.task);
             this.router.navigateByUrl("/");
         }
     }
 
     resetForm() {console.log("#############################reset");
-        //this.product = new Product();
+	this.model.getTasklist();
     }
 }

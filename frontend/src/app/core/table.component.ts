@@ -11,16 +11,15 @@ export class TableComponent {
 
     constructor(private model: Model) { }
 
-    getTasklist(): Array<Task> {
-        return this.model.getTasklist();
+    getItems(): Array<Task> {
+        return this.model.getItems();
     }
 
     deleteItem(item: Task) {
-        console.log(item.name);
+ 	this.model.deleteTask(item);
 	window.location.reload();
     }
 
     editItem(item: Task) {
-        console.log(item.name);
     }
 }
