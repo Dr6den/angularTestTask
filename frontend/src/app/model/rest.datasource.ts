@@ -14,8 +14,7 @@ export class RestDataSource {
 
     getTasklist(): Observable<Task[]> {
         let url = this.url + "/getTasklist";
-return this.http.get<Task[]>(url);
-        //return this.sendRequest<Task[]>("GET", url);
+        return this.sendRequest<Task[]>("GET", url);
     }
 
     getExecutors(): Observable<string[]> {
@@ -23,9 +22,9 @@ return this.http.get<Task[]>(url);
         return this.sendRequest<string[]>("GET", url);
     }
 
-    saveTask(task: Task): Observable<string> {
+    saveTask(task: Task): Observable<Task> {
 	let url = this.url + "/saveTask/" + task.name;
-        return this.sendRequest<string>("PUT", url, "{}");
+        return this.sendRequest<Task>("PUT", url, task);
     }
 
     deleteTask(id: string): Observable<string> {
@@ -33,7 +32,7 @@ return this.http.get<Task[]>(url);
         return this.sendRequest<string>("DELETE", url);
     }
 
-    private sendRequest<T>(verb: string, url: string, body?: string)
+    private sendRequest<T>(verb: string, url: string, body?: Task)
         : Observable<T> {
 
         let myHeaders = new HttpHeaders();

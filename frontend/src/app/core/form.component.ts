@@ -46,15 +46,21 @@ export class FormComponent {
 
     editing: boolean = false;
 
-    submitForm(form: NgForm) {console.log("#############################submit"+this.task.startDate);
+    submitForm(form: NgForm) {
         if (form.valid) {
-	    this.model.getTasklist();
+	    let checkedExecutors = [];
+            this.executorsMap.forEach( (key, val) => {
+		if (key === true) {checkedExecutors.push(val);}
+	    });
+
+	    this.task.executors = checkedExecutors;
             this.model.saveTask(this.task);
+	    this.model.getTasklist();
             this.router.navigateByUrl("/");
         }
     }
 
-    resetForm() {console.log("#############################reset");
+    resetForm() {
 	this.model.getTasklist();
     }
 }
