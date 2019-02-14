@@ -12,7 +12,7 @@ export class Model {
     subscriptions = new Subscription();
 
     getTasklist(): void {
-	this.dataSource.getTasklist().subscribe((data: {}) => {
+	this.dataSource.getTasklist().subscribe((data) => {
 		if (data[0] != undefined) {
 			this.tasklist = new Tasklist(data);
 		}
