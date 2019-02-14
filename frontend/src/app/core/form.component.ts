@@ -21,7 +21,7 @@ export class FormComponent {
 		this.task.name = "";
 		this.task.startDate = new Date();
 		this.task.endDate = new Date();
-		this.task.executors = this.model.getExecutors().subscribe(data => {
+		this.model.getExecutors().subscribe(data => {
 			if ((data[0] != undefined) && typeof data[0] == "string") {
 				this.task.executors = Object.assign(new Array(), data);
 				data.map(obj => this.executorsMap.set(obj, false));
@@ -31,10 +31,10 @@ export class FormComponent {
 		this.task.name = activeRoute.snapshot.params["name"];
 		this.task.startDate = activeRoute.snapshot.params["startDate"];
 		this.task.endDate = activeRoute.snapshot.params["endDate"];
-		let allOfExecutors = activeRoute.snapshot.params["executors"].split(','); 
-		this.task.executors = this.model.getExecutors().subscribe(data => {
+		let allOfExecutors = activeRoute.snapshot.params["executors"]; 
+		this.model.getExecutors().subscribe(data => {
 			if ((data[0] != undefined) && typeof data[0] == "string") {
-				this.task.executors = Object.assign(new Array(), data);
+				this.task.executors = Object.assign(new Array<string>(), data);
 		 		this.task.executors.map(obj => {
 					allOfExecutors.includes(obj) ? 
 						this.executorsMap.set(obj, true) : 
