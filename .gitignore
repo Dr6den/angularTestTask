@@ -6,3 +6,5 @@ nb-configuration.xml
 frontend/node_modules
 frontend/node_modules/
 build/
+/TasklistRestEndpoint/target/
+/TasklistRestEndpoint/nbproject/
