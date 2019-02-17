@@ -1,11 +1,11 @@
-package com.tasklist.res.endpoint;
+package com.tasklist.rest.endpoint;
 
+import com.domain.logic.service.TasklistDomainService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import static javax.ws.rs.HttpMethod.PUT;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -15,8 +15,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/")
-public class TaskEndpoint {
-    static int num = 0;
+public class TasklistEndpoint {
+    /*private TasklistDomainService daoService;
+    
+    public TasklistEndpoint() {
+        daoService = new TasklistDomainService();
+    }*/
     
     @Path("/saveTask/{name}")
     @PUT
@@ -29,7 +33,7 @@ public class TaskEndpoint {
     @POST
     @Path("/updateTask")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateTask(String task) {        
+    public Response updateTask(String task) {      
         return Response.status(200).entity("Task saved successfully").build();
 
     }
@@ -51,8 +55,6 @@ public class TaskEndpoint {
         executors[3] = "Glory";
         executors[4] = "Andrew";
         executors[5] = "Lissa";
-//executors[num] = null; 
-num++;if(num > 5) num=0;
                 
         ObjectMapper mapper = new ObjectMapper();
         String response;
@@ -103,4 +105,8 @@ num++;if(num > 5) num=0;
         }
         return response;
     }
+
+    /*public void close() throws Exception {
+        this.daoService.close();
+    }*/
 }

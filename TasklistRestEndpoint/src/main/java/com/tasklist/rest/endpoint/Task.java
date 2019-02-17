@@ -1,4 +1,4 @@
-package com.tasklist.res.endpoint;
+package com.tasklist.rest.endpoint;
 
 /**
  *

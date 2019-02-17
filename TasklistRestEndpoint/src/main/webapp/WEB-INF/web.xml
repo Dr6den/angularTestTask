@@ -10,11 +10,11 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.howtodoinjava.jersey</param-value>
+            <param-value>com.tasklist.rest.endpoint</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
-            <param-value>my.app.CrossOriginResourceSharingFilter</param-value>
+            <param-value>com.tasklist.rest.endpoint.TasklistCrossOriginResourceSharingFilter</param-value>
         </init-param>
         <init-param>
 		<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
