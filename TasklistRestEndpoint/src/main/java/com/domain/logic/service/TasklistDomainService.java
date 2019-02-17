@@ -16,13 +16,18 @@ public class TasklistDomainService implements AutoCloseable {
     public TasklistDomainService() {
         daoService = new TaskDaoService();
     }
+
+    public TasklistDomainService(TaskDaoService daoService) {
+        this.daoService = daoService;
+    }
     
     public String[] getExecutors() {
         String[] result = new String[0];
         Set<String> uniqueExecutors = new HashSet<>();
         Task[] tasks = daoService.getTasklist();
         
-        Stream.of(tasks).forEach((Task task) -> uniqueExecutors.add(task.getName()));
+        Stream.of(tasks).forEach((Task task) -> task.getExecutors().stream()
+                .forEach((String executorName) -> uniqueExecutors.add(executorName)));
         
         result = uniqueExecutors.toArray(new String[uniqueExecutors.size()]);
         return result;
@@ -44,5 +49,5 @@ public class TasklistDomainService implements AutoCloseable {
     public void close() throws Exception {
         daoService.close();
     }
-    
+
 }
