@@ -3,6 +3,10 @@ package com.tasklist.rest.endpoint;
 import com.domain.logic.service.TasklistDomainService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.model.entities.Task;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,32 +19,32 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/")
-public class TasklistEndpoint {
-    /*private TasklistDomainService daoService;
+public class TasklistEndpoint implements AutoCloseable {
+    private TasklistDomainService service;
     
     public TasklistEndpoint() {
-        daoService = new TasklistDomainService();
-    }*/
+        service = new TasklistDomainService();
+    }
     
     @Path("/saveTask/{name}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveTask(String task, @PathParam("name") String sku) {
+    public Response saveTask(String taskJson, @PathParam("name") String sku) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            Task task = mapper.readValue(taskJson, Task.class);
+            service.saveTask(task);
+        } catch (IOException ex) {
+            return Response.status(500).entity("ServerError" + ex.getMessage()).build();
+        }
         return Response.status(200).entity("Task saved successfully").build();
     }
-    
-    @POST
-    @Path("/updateTask")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateTask(String task) {      
-        return Response.status(200).entity("Task saved successfully").build();
-
-    }
-    
+   
     @DELETE
     @Path("/deleteTask/{id}")
     public Response deleteTask(@PathParam("id") Integer id) {
+        service.deleteTask(id);
         return Response.status(200).entity("Task deleted successfully").build();
     }
 
@@ -48,13 +52,7 @@ public class TasklistEndpoint {
     @Path("/getExecutors")
     @Produces(MediaType.APPLICATION_JSON)
     public String getExecutors() {
-        String[] executors = new String[6];
-        executors[0] = "Luccy";
-        executors[1] = "Grace";
-        executors[2] = "Nadia";
-        executors[3] = "Glory";
-        executors[4] = "Andrew";
-        executors[5] = "Lissa";
+        String[] executors = service.getExecutors();
                 
         ObjectMapper mapper = new ObjectMapper();
         String response;
@@ -70,31 +68,7 @@ public class TasklistEndpoint {
     @Path("/getTasklist")
     @Produces(MediaType.APPLICATION_JSON)
     public String getTasklist() {
-        Task[] taskList = new Task[4];
-        String[] executorsTabulating = new String[3];
-        executorsTabulating[0] = "Luccy";
-        executorsTabulating[1] = "Grace";
-        executorsTabulating[2] = "Nadia";
-        String[] executorsPanchCardSorting = new String[3];
-        executorsPanchCardSorting[0] = "Faith";
-        executorsPanchCardSorting[1] = "Maria";
-        executorsPanchCardSorting[2] = "Patti";
-        String[] executorsMagtneticTapeInstall = new String[3];
-        executorsMagtneticTapeInstall[0] = "Glory";
-        executorsMagtneticTapeInstall[1] = "Andrew";
-        executorsMagtneticTapeInstall[2] = "Lissa";
-        String[] executorsMagneticDrumCleaning = new String[3];
-        executorsMagneticDrumCleaning[0] = "Helen";
-        executorsMagneticDrumCleaning[1] = "Peter";
-        executorsMagneticDrumCleaning[2] = "Clay";
-        Task taskTabulating = new Task("1", "tabulating", "1.1.1920", "2.2.1920", executorsTabulating);
-        Task taskPanchcardSorting = new Task("1", "panch card sorting", "1.1.1921", "3.3.1921", executorsPanchCardSorting);
-        Task taskMagneticTapeInstall = new Task("1", "magnetic tape install", "1.1.1922", "4.4.1922", executorsMagtneticTapeInstall);
-        Task taskMagneticDrumCleaning = new Task("1", "magnetic drum cleaning", "1.1.1923", "5.5.1923", executorsMagneticDrumCleaning);
-        taskList[0] = taskTabulating;
-        taskList[1] = taskPanchcardSorting;
-        taskList[2] = taskMagneticTapeInstall;
-        taskList[3] = taskMagneticDrumCleaning;
+        Task[] taskList = service.getTasklist();
 
         ObjectMapper mapper = new ObjectMapper();
         String response;
@@ -106,7 +80,8 @@ public class TasklistEndpoint {
         return response;
     }
 
-    /*public void close() throws Exception {
-        this.daoService.close();
-    }*/
+    @Override
+    public void close() throws Exception {
+        this.service.close();
+    }
 }

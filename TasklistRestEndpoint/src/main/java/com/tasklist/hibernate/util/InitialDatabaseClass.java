@@ -43,10 +43,10 @@ public class InitialDatabaseClass {
             executors4.add(executor5);
             executors4.add(executor6);
             
-            Task task1 = new Task("tabulating", "12.5.1920", "25.5.1920", executors1);
-            Task task2 = new Task("magnetic tape installation", "12.5.1921", "25.5.1921", executors2);
-            Task task3 = new Task("wires switching", "12.5.1922", "25.5.1922", executors3);
-            Task task4 = new Task("magnetic drum cleaning", "12.5.1923", "25.5.1923", executors4);
+            Task task1 = new Task("tabulating", "12.5.1920", "5.25.1920", executors1);
+            Task task2 = new Task("magnetic tape installation", "5.25.1921", "12.15.1921", executors2);
+            Task task3 = new Task("wires switching", "12.5.1922", "5.25.1922", executors3);
+            Task task4 = new Task("magnetic drum cleaning", "12.5.1923", "5.25.1923", executors4);
             
             factory.saveTask(task1);
             factory.saveTask(task2);
