@@ -1,0 +1,18 @@
+create database tasklist;
+
+use tasklist;
+
+CREATE TABLE task
+(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(200), 
+    startDate VARCHAR(20),
+    endDate VARCHAR(20)
+);
+
+CREATE TABLE executor
+(
+    name VARCHAR(200),
+    Task_id INT,
+    FOREIGN KEY (Task_id)  REFERENCES task (id)
+);
