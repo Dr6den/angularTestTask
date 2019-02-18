@@ -23,7 +23,7 @@ export class RestDataSource {
     }
 
     saveTask(task: Task): Observable<Task> {
-	let url = this.url + "/saveTask/" + task.name;
+	let url = this.url + "/saveTask/" + task.id;
         return this.sendRequest<Task>("PUT", url, task);
     }
 

@@ -5,12 +5,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.entities.Task;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,15 +23,15 @@ public class TasklistEndpoint implements AutoCloseable {
         service = new TasklistDomainService();
     }
     
-    @Path("/saveTask/{name}")
+    @Path("/saveTask/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveTask(String taskJson, @PathParam("name") String sku) {
+    public Response saveTask(String taskJson, @PathParam("id") String id) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             Task task = mapper.readValue(taskJson, Task.class);
-            service.saveTask(task);
+            service.saveTask(id, task);
         } catch (IOException ex) {
             return Response.status(500).entity("ServerError" + ex.getMessage()).build();
         }

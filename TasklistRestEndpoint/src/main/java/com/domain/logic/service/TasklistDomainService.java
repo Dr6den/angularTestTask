@@ -41,8 +41,18 @@ public class TasklistDomainService implements AutoCloseable {
         daoService.deleteTask(id);
     }
     
-    public void saveTask(Task task) {
-        daoService.saveTask(task);
+    public void saveTask(String id, Task task) {
+        if(!id.equals("undefined")) {
+            Integer idInt = Integer.valueOf(id);
+            Task persistedTask = daoService.getTaskById(idInt);
+            persistedTask.setName(task.getName());
+            persistedTask.setStartDate(task.getStartDate());
+            persistedTask.setEndDate(task.getEndDate());
+            persistedTask.setExecutors(task.getExecutors());
+            daoService.saveTask(persistedTask);
+        } else {
+            daoService.saveTask(task);
+        }
     }
 
     @Override

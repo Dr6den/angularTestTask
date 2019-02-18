@@ -28,6 +28,7 @@ export class FormComponent {
 			}
 		});
 	} else {
+		this.task.id = activeRoute.snapshot.params["id"];
 		this.task.name = activeRoute.snapshot.params["name"];
 		this.task.startDate = activeRoute.snapshot.params["startDate"];
 		this.task.endDate = activeRoute.snapshot.params["endDate"];
