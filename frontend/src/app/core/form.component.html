@@ -34,7 +34,7 @@
 
       <ul class="list-unstyled mt-3">
   	<li *ngFor="let item of executorsMap | keyvalue; let i = index">
-    		<input type="checkbox" [(ngModel)]="item.value" [name]="'itemvalue'+i"> {{item.key}}
+    		<input type="checkbox" [(ngModel)]="item.value" [name]="'itemvalue'+i" (change)="change(item.value, item.key)"> {{item.key}}
   	</li>
       </ul>
   

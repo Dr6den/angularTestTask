@@ -63,4 +63,8 @@ export class FormComponent {
     resetForm() {
 	this.model.getTasklist();
     }
+
+	change(val: boolean, key: string) {
+		this.executorsMap.set(key, val);
+	}
 }
